@@ -1,0 +1,25 @@
+node_modules/
+coverage/
+test-results/
+playwright-report/
+.vite/
+.cache/
+.DS_Store
+.env
+.env.*
+*.log
+*.pem
+*.key
+*.p12
+*.pfx
+*.sql
+*.sqlite
+*.sqlite3
+*.zip
+*.tar
+*.tar.gz
+artifacts/
+backups/
+dist/**/*.map
+
+# 설치 시 별도 빌드를 하지 않으므로 dist의 JS/CSS/타입 파일은 추적한다.

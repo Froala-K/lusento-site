@@ -1,0 +1,18 @@
+feature: lusento-template-isolation
+description: Basic과 별개로 로드되는 루센토 템플릿의 등록 및 기존 모듈 연결
+axes:
+  registration: [manifest, component_registry, editor_spec, built_bundle]
+  connection: [template_handler, shared_handler, catalog_base, compare_api]
+effects:
+  - 새 식별자와 IIFE 전역으로 로드된다.
+  - 구매 레이아웃이 호출하는 전용 핸들러가 실제 등록된다.
+  - 공통 핸들러 및 카탈로그 확장 대상 슬롯이 보존된다.
+  - 상품 API와 공통 CSS는 기존 카탈로그 모듈에 남는다.
+tests:
+  - __tests__/lusento-package.test.ts
+  - __tests__/layouts/user-base-category-navigation.test.ts
+  - __tests__/layouts/product-search.test.tsx
+  - src/components/composite/__tests__/HeaderCategoryNavigation.test.tsx
+  - src/components/composite/__tests__/Footer.responsive.test.tsx
+  - src/handlers/__tests__/identityLauncher.test.ts
+  - src/handlers/__tests__/productOptionsAdditional.test.ts

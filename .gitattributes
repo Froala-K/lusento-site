@@ -1,0 +1,8 @@
+* text=auto
+.gitignore export-ignore
+.gitattributes export-ignore
+__tests__/ export-ignore
+tests/ export-ignore
+src/**/__tests__/ export-ignore
+src/**/*.test.ts export-ignore
+src/**/*.test.tsx export-ignore

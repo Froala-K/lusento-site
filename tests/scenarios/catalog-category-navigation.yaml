@@ -1,0 +1,47 @@
+feature: 공통 헤더 상품 카테고리 네비게이션
+
+description: |
+  기본 사용자 레이아웃의 홈·인기 다음 메뉴를 전체 상품과 활성 최상위 상품 카테고리로
+  구성한다. 데스크톱과 모바일은 같은 공개 카테고리 API를 사용하며, 데스크톱에서도 모든
+  카테고리를 상단 가로 메뉴에 바로 표시한다. `CategoryHeader`는 기존 Header의 내부 구현을 공유하는
+  별도 래퍼로 상품 메뉴 모드를 고정하고
+  독립된 컴포넌트 이름과 SEO 렌더 모드를 사용한다. 기존 `Header`는 쇼핑·게시판 메뉴를
+  그대로 렌더해 저장된 레이아웃과 검색엔진 노출의 호환성을 유지한다. 업데이트 시 사용자 수정
+  레이아웃을 보존하기 위해 기존 base `boards`와 쇼핑 페이지 `categories`는 유지하고,
+  헤더에는 충돌하지 않는 `header_categories` 데이터소스를 따로 사용한다.
+
+axes:
+  surface: [desktop, mobile]
+
+effects:
+  - home_and_popular_remain_first
+  - all_products_precedes_active_categories
+  - desktop_all_categories_remain_visible_without_more
+  - category_click_uses_canonical_shop_path
+  - mobile_menu_closes_before_navigation
+  - mobile_category_bar_remains_visible
+  - legacy_shop_and_board_tail_is_removed_from_default_layout
+  - base_boards_source_is_preserved_for_upgrade_compatibility
+  - mypage_board_does_not_redeclare_inherited_boards_source
+  - header_categories_source_is_independent
+  - shop_pages_keep_local_categories_source_for_upgrade_compatibility
+  - seo_uses_header_category_source
+  - category_header_wrapper_fixes_custom_navigation_mode
+  - seo_header_keeps_legacy_shop_and_boards_render_mode
+  - seo_category_header_uses_custom_navigation_render_mode
+  - seo_shop_base_and_category_paths_are_evaluator_compatible
+  - editor_preview_has_header_category_sample
+  - mobile_all_products_stays_active_on_product_detail
+  - omitted_custom_navigation_preserves_component_fallback
+
+test_files:
+  - templates/_bundled/lusento-site/src/components/composite/__tests__/HeaderCategoryNavigation.test.tsx
+  - templates/_bundled/lusento-site/__tests__/layouts/user-base-category-navigation.test.ts
+  - tests/Unit/Seo/RealWorldRenderingTest.php
+
+validation:
+  audit_rule: frontend-change-requires-e2e
+  browser_check: Chrome MCP
+  note: |
+    실제 Header 렌더 테스트가 데스크톱의 빈 목록·표시 한도·더보기·이동·기존 폴백을 검증하고,
+    레이아웃 구조 테스트가 모바일의 동일 데이터 소스·메뉴 순서·닫기 후 이동과 기존 소스 보존·SEO 분기 계약을 검증한다.
